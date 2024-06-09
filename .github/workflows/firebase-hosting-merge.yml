@@ -24,7 +24,7 @@ jobs:
       - name: deploy to firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-           repoToken: ${{ secrets.GITHUB_TOKEN }}
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE3_DASHBOARD_E70BB }}
           channelId: live
           projectId: vue3-dashboard-e70bb
