@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import type { User } from '@/stores/modules/types/type'
@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
 
   const isLoggedIn = ref(false)
 
-  const userInfo: User = ref({
+  const userInfo: Ref<User> = ref({
     displayName: '',
     photoURL: '',
     email: '',
@@ -19,7 +19,6 @@ export const useUserStore = defineStore('user', () => {
   const getLoggedInState = () => {
     onAuthStateChanged(getAuth(), (user) => {
       isLoggedIn.value = user ? true : false
-      console.log('user', user)
       if (user) {
         isLoggedIn.value = true
 

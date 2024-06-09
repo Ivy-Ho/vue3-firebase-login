@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'public',
-      component: () => import('@/layouts/DefaultLayout.vue'),
+      component: () => import('../layouts/DefaultLayout.vue'),
       redirect: '/',
       children: [
         {

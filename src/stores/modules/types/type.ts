@@ -1,6 +1,6 @@
-export default interface User {
-  displayName: string
-  photoURL: string
-  email: string
-  uid: string
+export interface User {
+  displayName: string | null
+  photoURL: string | null
+  email: string | null
+  uid: string | null
 }
