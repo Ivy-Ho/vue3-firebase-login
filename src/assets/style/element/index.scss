@@ -1,0 +1,15 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #8b5cf6
+    )
+  )
+);
+
+.el-input__wrapper {
+  height: 40px;
+}
+
+.el-button {
+  height: 40px;
+}
