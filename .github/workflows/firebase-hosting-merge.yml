@@ -6,9 +6,6 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
-env:
-  VITE_PUBLIC_API_KEY: ${{secrets.VITE_PUBLIC_API_KEY}}
-
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -27,6 +24,7 @@ jobs:
       - name: deploy to firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          envkey_VITE_PUBLIC_API_KEY: ${{secrets.VITE_PUBLIC_API_KEY}}
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE3_DASHBOARD_E70BB }}
           channelId: live
