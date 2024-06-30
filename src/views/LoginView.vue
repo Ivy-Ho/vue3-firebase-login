@@ -85,8 +85,7 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
   const auth = getAuth()
   signInWithEmailAndPassword(auth, form.value.email, form.value.password)
     .then((data) => {
-      console.log(auth.currentUser)
-
+      // console.log(auth.currentUser)
       router.push('/')
     })
     .catch((err) => {
