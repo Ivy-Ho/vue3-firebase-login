@@ -8,31 +8,7 @@
       default-active="2"
       text-color="#fff"
     >
-      <MenuItem :menuList="userStore.menuRoutes[0].children" />
-      <!-- <el-menu-item index="1">
-        <el-icon><HomeFilled /></el-icon>
-        <span>Home</span>
-      </el-menu-item>
-      <el-sub-menu index="2">
-        <template #title>
-          <el-icon><Lock /></el-icon>
-          <span>Authentication</span>
-        </template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="2-1-1">item one</el-menu-item>
-          <el-menu-item index="2-1-2">item two</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
-      <el-sub-menu index="3">
-        <template #title>
-          <el-icon><TakeawayBox /></el-icon>
-          <span>Products</span>
-        </template>
-        <el-menu-item index="3-1">item one</el-menu-item>
-        <el-menu-item index="3-2">item two</el-menu-item>
-      </el-sub-menu> -->
+      <MenuItem :menuList="userStore.menuRoutes[0].children || []" />
     </el-menu>
   </div>
 </template>

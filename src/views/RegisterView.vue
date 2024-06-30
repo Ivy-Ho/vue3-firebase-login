@@ -47,7 +47,7 @@
     </el-form>
 
     <div class="mt-10">
-      <el-button type="primary" @click="register" class="mb-2 w-full">Register</el-button>
+      <el-button type="primary" @click="register(formRef)" class="mb-2 w-full">Register</el-button>
       <p class="mt-3 text-center text-sm text-gray-400">
         Already have an account?
         <router-link to="/login" custom v-slot="{ navigate }">
@@ -61,29 +61,30 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-
+import type { FormInstance } from 'element-plus'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-const formRef = ref(null)
+const formRef = ref<FormInstance>()
 const form = ref({
   email: '',
   password: ''
 })
 
-const register = async () => {
-  await formRef.value.validate()
-  const auth = getAuth()
-  createUserWithEmailAndPassword(auth, form.value.email, form.value.password)
-    .then((data) => {
-      console.log('Successfully register!')
-      console.log(auth.currentUser)
-      router.push('/')
-    })
-    .catch((err) => {
-      console.log(err.code)
-      alert(err.message)
-    })
+const register = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid) => {
+    if (valid) {
+      const auth = getAuth()
+      createUserWithEmailAndPassword(auth, form.value.email, form.value.password)
+        .then(() => {
+          router.push('/')
+        })
+        .catch((err) => {
+          alert(err.message)
+        })
+    }
+  })
 }
 </script>
 
