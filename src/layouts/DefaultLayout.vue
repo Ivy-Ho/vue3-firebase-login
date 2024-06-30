@@ -1,5 +1,5 @@
 <script setup>
-import Navbar from '@/layouts/components/Navbar.vue'
+import DefaultNavbar from '@/layouts/components/DefaultNavbar.vue'
 
 import { useGlobalStore } from '@/stores/global'
 const globalStore = useGlobalStore()
@@ -12,7 +12,7 @@ const globalStore = useGlobalStore()
     element-loading-text="loading..."
     class="flex h-screen"
   >
-    <Navbar />
+    <DefaultNavbar />
     <div class="m-auto">
       <router-view />
     </div>

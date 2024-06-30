@@ -14,7 +14,7 @@
           {
             type: 'email',
             message: 'Please input correct email address',
-            trigger: ['blur']
+            trigger: 'blur'
           }
         ]"
       >
@@ -27,6 +27,12 @@
             required: true,
             message: 'Please input password',
             trigger: 'blur'
+          },
+          {
+            required: true,
+            min: 6,
+            message: 'Password must be at least 6 characters',
+            trigger: 'change'
           }
         ]"
       >
@@ -35,12 +41,13 @@
           placeholder="Password"
           autocomplete="off"
           v-model="form.password"
+          show-password
         />
       </el-form-item>
     </el-form>
 
     <div class="mt-10">
-      <el-button type="primary" @click="handleLogin" class="mb-2 w-full">Login</el-button>
+      <el-button type="primary" @click="handleLogin(formRef)" class="mb-2 w-full">Login</el-button>
       <el-button class="w-full" @click="userStore.signInWithGoogle">
         <img src="/icons/google.webp" class="mr-3 w-5" alt="google icon" />
         <span>Continue with Google</span>
@@ -57,6 +64,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { FormInstance } from 'element-plus'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 import { useRouter } from 'vue-router'
@@ -65,13 +73,15 @@ const router = useRouter()
 import { useUserStore } from '@/stores/modules/user'
 const userStore = useUserStore()
 
-const formRef = ref(null)
+const formRef = ref<FormInstance>()
 const form = ref({
   email: '',
   password: ''
 })
 
-const handleLogin = () => {
+const handleLogin = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate()
   const auth = getAuth()
   signInWithEmailAndPassword(auth, form.value.email, form.value.password)
     .then((data) => {

@@ -1,19 +1,19 @@
 <template>
-  <nav class="container fixed top-0 left-0 right-0 flex items-center justify-between px-5 py-6">
-    <router-link to="/">
-      <h1 class="text-3xl font-medium italic text-gray-600">Dashboo</h1>
-    </router-link>
+  <nav class="flex items-center justify-between px-5 py-6">
+    <!-- breadcrumb -->
+
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/' }">
+        {{ $router.currentRoute.value.name }}
+      </el-breadcrumb-item>
+      <!-- <el-breadcrumb-item>
+        <a href="/">item one</a>
+      </el-breadcrumb-item> -->
+      <!-- <el-breadcrumb-item>promotion list</el-breadcrumb-item>
+      <el-breadcrumb-item>promotion detail</el-breadcrumb-item> -->
+    </el-breadcrumb>
+    <div class="flex items-center gap-4"></div>
     <div class="flex items-center">
-      <!-- login btn -->
-      <router-link v-if="!userStore.isLoggedIn" to="/login" custom v-slot="{ navigate }">
-        <el-button
-          v-show="globalStore.pathName !== 'login' && globalStore.pathName !== 'register'"
-          type="primary"
-          @click="navigate"
-          role="link"
-          >Login</el-button
-        >
-      </router-link>
       <!-- user info -->
       <div v-if="userStore.isLoggedIn" class="flex items-center gap-2">
         <!-- user photo -->
@@ -66,8 +66,6 @@
 </template>
 
 <script setup lang="ts">
-import { UserFilled, ArrowDownBold } from '@element-plus/icons-vue'
-
 import { useRouter } from 'vue-router'
 const router = useRouter()
 

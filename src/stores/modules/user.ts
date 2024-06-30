@@ -2,7 +2,9 @@ import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import type { User } from '@/stores/modules/types/type'
-import { useRouter } from 'vue-router'
+import { useRouter, type RouteRecordRaw } from 'vue-router'
+
+import { constantRoute } from '@/router/routes'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
@@ -46,5 +48,7 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { isLoggedIn, getLoggedInState, userInfo, signInWithGoogle }
+  const menuRoutes: Array<RouteRecordRaw> = constantRoute
+
+  return { isLoggedIn, getLoggedInState, userInfo, signInWithGoogle, menuRoutes }
 })
